@@ -34,7 +34,7 @@
     </bean>
 <!-- 扫描实现类的包 -->
     <context:component-scan base-package="controller"></context:component-scan>
-	<context:component-scan base-package="service.Impl"></context:component-scan>
+	<context:component-scan base-package="serviceImpl"></context:component-scan>
 	<context:component-scan base-package="dao"></context:component-scan>
     <!-- 加载其他的配置 -->
     <import resource="classpath:applicationContext-dao.xml"/>
