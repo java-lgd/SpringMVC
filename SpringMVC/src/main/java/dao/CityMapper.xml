@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="dao.CityDao">    <!-- xml与接口dao关联 -->
+     <select id="select" resultType="model.City" parameterType="java.lang.String">
+     select * from city ${_parameter}
+     </select>
+      <delete id="delete" parameterType="int" >
+     delete from city where id=#{id}
+     </delete>
+     <insert id="insert" parameterType="model.City" >
+     insert into city(cityID,city,father) value(#{cityID},#{city},#{father})
+     </insert> 
+     <update id="update" parameterType="model.City">
+     update city set cityID=#{cityID},city=#{city},father=#{father} where id=#{id}
+     </update>
+ </mapper>

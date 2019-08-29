@@ -15,16 +15,12 @@ import model.City;
 @Repository
 public interface CityDao {
 	
-	@Select("select * from city ${where}")
-	public List<City> select(@Param("where") String txt);
+	public List<City> select(String txt);
 	
-	@Insert("insert into city(cityID,city,father) value(#{cityID},#{city},#{father})")
 	public void insert(City c );
 	
-	@Delete("delete from city where id=#{id}")
 	public void delete(int id);
-	
-	@Update("update city set cityID=#{cityID},city=#{city},father=#{father} where id=#{id}")
+
 	public void update(City c);
 
 }
