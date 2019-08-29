@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import model.City;
@@ -15,7 +14,7 @@ import model.City;
 @Repository
 public interface CityDao {
 	
-	@Select("select * from city ${where}")
+	@Select("select city.*,province from city inner join province on father=provinceID ${where}")
 	public List<City> select(@Param("where") String txt);
 	
 	@Insert("insert into city(cityID,city,father) value(#{cityID},#{city},#{father})")

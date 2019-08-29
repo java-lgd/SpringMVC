@@ -32,7 +32,7 @@
 	<tr>
 				<td>${c.cityID}</td>
 				<td>${c.city}</td>
-				<td>${c.father}</td>
+				<td>${c.province}</td>
 				<td>
 					<a href="javascript:del(${c.id })">删除</a>
 					<a href="edit.do?id=${c.id }">修改</a>

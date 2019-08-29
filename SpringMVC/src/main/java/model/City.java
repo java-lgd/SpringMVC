@@ -5,6 +5,7 @@ public class City {
 	private String cityID;
 	private String city;
 	private String father;
+	private String province;
 	
 	public City() {
 	}
@@ -32,6 +33,11 @@ public class City {
 	public void setFather(String father) {
 		this.father = father;
 	}
-	
+	public String getProvince() {
+		return province;
+	}
+	public void setProvince(String province) {
+		this.province = province;
+	}
 
 }
