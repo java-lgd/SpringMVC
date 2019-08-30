@@ -9,7 +9,8 @@
 </head>
 <body>
 
-		<form action="insert.action" method="post">
+	<c:if test="${city==null}">
+		<form action="insert.do" method="post">
 			<input name="cityID" value="ID">
 			<input name="city" value="city">
 				<select name="father">
@@ -19,6 +20,28 @@
 				</select>
 			<input type="submit" value="提交">
 	</form>
+	</c:if>
+		
+	
+	<c:if test="${city!=null}">
+	<form action="update.do" method="post">
+			<input name="id"  type="hidden" value="${city.id }">
+			<input name="cityID" value="${city.cityID}">
+			<input name="city" value="${city.city}">
+				<select name="father">
+					<c:forEach items="${prolist}"  var="s" >
+						<c:if test="${(city.father).equals(s.provinceID)}">
+							<option value="${s.provinceID }" selected="selected">${s.province}</option>
+						</c:if>
+						<c:if test="${!(city.father).equals(s.provinceID)}">
+							<option value="${s.provinceID }" >${s.province}</option>
+						</c:if>
+					</c:forEach>
+				</select>
+			<input type="submit" value="提交">
+	</form>
+	</c:if>
+	
 	
 </body>
 </html>
