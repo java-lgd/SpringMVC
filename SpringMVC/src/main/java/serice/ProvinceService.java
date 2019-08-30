@@ -13,4 +13,6 @@ public interface ProvinceService {
 	public void delete(int id);
 	
 	public void update(Province c);
+	
+	public Province selectById(int id);
 }

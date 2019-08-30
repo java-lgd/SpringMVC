@@ -13,4 +13,6 @@ public interface CityService {
 	public void delete(int id);
 	
 	public void update(City c);
+	
+	public City selectById(int id);
 }

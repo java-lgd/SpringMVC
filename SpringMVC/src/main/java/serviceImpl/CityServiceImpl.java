@@ -30,5 +30,9 @@ public class CityServiceImpl implements CityService{
 	public void update(City c) {
 		dao.update(c);
 	}
+	
+	public City selectById(int id){
+		return  dao.selectById(id);
+	}
 
 }

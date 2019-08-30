@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import model.City;
 import model.Province;
 
 public interface ProvinceDao {
@@ -22,4 +23,7 @@ public interface ProvinceDao {
 	
 	@Update("update city set provinceID=#{provinceID},province=#{province} where id=#{id}")
 	public void update(Province c);
+	
+	@Select("select *  from province where id=#{id}")
+	public Province selectById(int id);
 }

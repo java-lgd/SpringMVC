@@ -30,5 +30,9 @@ public class ProvinceServiceImpl implements ProvinceService{
 	public void update(Province c) {
 		dao.update(c);
 	}
+	
+	public Province selectById(int id) {
+		return dao.selectById(id);
+	}
 
 }

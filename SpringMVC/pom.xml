@@ -124,6 +124,7 @@
       <version>${jacksonForJSON.version}</version>
     </dependency>
 
+	<!-- mybatis 加上数据库一个4个 -->
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis-spring</artifactId>

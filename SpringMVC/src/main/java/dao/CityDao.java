@@ -25,5 +25,8 @@ public interface CityDao {
 	
 	@Update("update city set cityID=#{cityID},city=#{city},father=#{father} where id=#{id}")
 	public void update(City c);
+	
+	@Select("select *  from city where id=#{id}")
+	public City selectById(int id);
 
 }
