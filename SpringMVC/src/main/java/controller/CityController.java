@@ -60,7 +60,7 @@ public class CityController {
 		return "{\"status\":1}";
 	}
 	
-	@RequestMapping(value="Address/getPros")
+	@RequestMapping(value="Address/getPros",method=RequestMethod.GET)
 	public @ResponseBody  List<Province> getPros(){
 		return pservice.select("");
 	}

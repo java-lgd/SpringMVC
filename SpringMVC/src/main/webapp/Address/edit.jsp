@@ -72,13 +72,13 @@ layui.use(['form',], function(){
 function init(){
 	$.post("Address/"+id, {_method : "get"}, function(json) {
 		render('myform', json);
-		getlist("Address/getPros","[name=father]",json.father);
+		getlist("Address/getPros", {_method : "get"},"[name=father]",json.father);
 	},"json");
 }
 if(id.length>0){
 	init();
 }else{
-	getlist("Address/getPros","[name=father]",0);
+	getlist("Address/getPros", {_method : "get"},"[name=father]",0);
 }
 
 </script>

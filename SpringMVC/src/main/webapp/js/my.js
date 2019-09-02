@@ -36,8 +36,8 @@ function fresh(id){
 }
 
 
-function getlist(url,selector,def_id){
-		$.post(url, function(json) {
+function getlist(url,data,selector,def_id){
+		$.post(url,data,function(json) {
 			var s=$(selector).empty();
 			s.append($("<option value=''></option>"))
 			for(var i=0;i<json.length;i++){
