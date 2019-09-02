@@ -49,7 +49,7 @@
 			table.render({
 				elem : '#demo',
 				height : 462,
-				url : 'Address/index.do', //数据接口
+				url : 'Address/index', //数据接口
 				toolbar : '#toolbarDemo',
 				page : 1 ,//开启分页	
 				cols : [ [ //表头
@@ -98,10 +98,11 @@
 				var data = obj.data;
 				if (obj.event === 'del') { ///lay-event 属性
 					myconfirm("刪除？",function(){
-						$.post("Address/delete.do", {id : data.id}, 
+						$.post('Address/'+data.id,
+						        {_method : "delete"}, 
 								function(json) {
-							reload('demo');
-							layer.close(layer.index);
+									reload('demo');
+									layer.close(layer.index);
 								}, "json");
 					});
 				}else{

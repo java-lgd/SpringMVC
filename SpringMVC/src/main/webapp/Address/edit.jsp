@@ -19,10 +19,12 @@
 </style>
 
 <c:if test="${param.id==null}">
-<form class="layui-form" lay-filter="myform" action="Address/insert.do">
+<form class="layui-form" lay-filter="myform" method="POST" action="<%=request.getServletContext().getContextPath()%>/Address">
+<input type="hidden" name="_method" value="POST">
 </c:if>
 <c:if test="${param.id!=null}">
-<form class="layui-form" lay-filter="myform" action="Address/update.do">
+<form class="layui-form" lay-filter="myform" method="POST" action="<%=request.getServletContext().getContextPath()%>/Address">
+<input type="hidden" name="_method" value="PUT">
 <input type="hidden" name="id" >
 </c:if>
   <div class="layui-form-item">
@@ -68,15 +70,15 @@ layui.use(['form',], function(){
 });
 
 function init(){
-	$.post("Address/edit.do",{id:id}, function(json) {
+	$.post("Address/"+id, {_method : "get"}, function(json) {
 		render('myform', json);
-		getlist("Address/getPros.do","[name=father]",json.provinceID);
+		getlist("Address/getPros","[name=father]",json.father);
 	},"json");
 }
 if(id.length>0){
 	init();
 }else{
-	getlist("Address/getPros.do","[name=father]"," ");
+	getlist("Address/getPros","[name=father]",0);
 }
 
 </script>

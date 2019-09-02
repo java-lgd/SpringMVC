@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import model.City;
@@ -23,8 +25,8 @@ public class CityController {
 	@Autowired
 	ProvinceService	pservice;
 	
-	@RequestMapping("index")
-	public @ResponseBody ReturnInfo index(String txt,Integer page,Integer limit,ModelMap m) {
+	@RequestMapping(value="/index", method = RequestMethod.GET)
+	public @ResponseBody ReturnInfo index(String txt, Integer page,Integer limit,ModelMap m) {
 		ReturnInfo info = new ReturnInfo();
 		String where="";
 		if(txt!=null&&txt.length()>0)
@@ -36,32 +38,27 @@ public class CityController {
 		return info;
 	}
 	
-	@RequestMapping("delete")
-	public @ResponseBody String delete(ModelMap m,int id) {
+	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)
+	public @ResponseBody String delete(@PathVariable("id") int id) {
 		service.delete(id);
 		return "{\"status\":1}";
 	}
 	
-	@RequestMapping("insert")
-	public @ResponseBody String insert(ModelMap m,City c) {
+	@RequestMapping(value="", method = RequestMethod.POST)
+	public @ResponseBody String insert(City c) {
 		service.insert(c);
 		return "{\"status\":1}";
 	}
 	
-	@RequestMapping("edit")
-	public @ResponseBody City edit(ModelMap m,int id) {
+	@RequestMapping(value="/{id}",method=RequestMethod.GET)
+	public @ResponseBody City edit(@PathVariable("id") Integer id) {
 		return service.selectById(id);
 	}
 	
-	@RequestMapping("update")
-	public @ResponseBody String update(ModelMap m,City c) {
+	@RequestMapping(value="",method=RequestMethod.PUT)
+	public @ResponseBody String update(City c) {
 		service.update(c);
 		return "{\"status\":1}";
-	}
-	
-	@RequestMapping("add")
-	public @ResponseBody String add(ModelMap m) {
-		return "Address/edit";
 	}
 	
 	@RequestMapping("getPros")
