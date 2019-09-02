@@ -17,7 +17,6 @@ import serice.ProvinceService;
 import utils.ReturnInfo;
 
 @Controller
-@RequestMapping("Address")
 public class CityController {
 	@Autowired
 	CityService service;
@@ -25,7 +24,7 @@ public class CityController {
 	@Autowired
 	ProvinceService	pservice;
 	
-	@RequestMapping(value="/index", method = RequestMethod.GET)
+	@RequestMapping(value="Address", method = RequestMethod.GET)
 	public @ResponseBody ReturnInfo index(String txt, Integer page,Integer limit,ModelMap m) {
 		ReturnInfo info = new ReturnInfo();
 		String where="";
@@ -38,30 +37,30 @@ public class CityController {
 		return info;
 	}
 	
-	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)
+	@RequestMapping(value="Address/{id}",method=RequestMethod.DELETE)
 	public @ResponseBody String delete(@PathVariable("id") int id) {
 		service.delete(id);
 		return "{\"status\":1}";
 	}
 	
-	@RequestMapping(value="", method = RequestMethod.POST)
+	@RequestMapping(value="Address", method = RequestMethod.POST)
 	public @ResponseBody String insert(City c) {
 		service.insert(c);
 		return "{\"status\":1}";
 	}
 	
-	@RequestMapping(value="/{id}",method=RequestMethod.GET)
+	@RequestMapping(value="Address/{id}",method=RequestMethod.GET)
 	public @ResponseBody City edit(@PathVariable("id") Integer id) {
 		return service.selectById(id);
 	}
 	
-	@RequestMapping(value="",method=RequestMethod.PUT)
+	@RequestMapping(value="Address",method=RequestMethod.PUT)
 	public @ResponseBody String update(City c) {
 		service.update(c);
 		return "{\"status\":1}";
 	}
 	
-	@RequestMapping("getPros")
+	@RequestMapping("Address/getPros")
 	public @ResponseBody  List<Province> getPros(){
 		return pservice.select("");
 	}

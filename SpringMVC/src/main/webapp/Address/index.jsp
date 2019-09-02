@@ -49,7 +49,7 @@
 			table.render({
 				elem : '#demo',
 				height : 462,
-				url : 'Address/index', //数据接口
+				url : 'Address', //数据接口
 				toolbar : '#toolbarDemo',
 				page : 1 ,//开启分页	
 				cols : [ [ //表头
