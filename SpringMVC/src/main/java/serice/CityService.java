@@ -5,8 +5,10 @@ import java.util.List;
 import model.City;
 
 public interface CityService {
+	
+	public int selectCount(String txt);
 
-	public List<City> select(String txt);
+	public List<City> select(String txt,String limit);
 	
 	public void insert(City c );
 	

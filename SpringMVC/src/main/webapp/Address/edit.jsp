@@ -5,43 +5,80 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>编辑</title>
+
+<base href="../">
+<link href="layui/css/layui.css" rel="stylesheet">
+<script type="text/javascript" src="layui/layui.all.js"></script>
+<script src="js/jquery-2.2.4.min.js" ></script>
+<script type="text/javascript" src="js/my.js"></script>
 </head>
 <body>
+<style>
+.layui-input{width:200px;}
+</style>
 
-	<c:if test="${city==null}">
-		<form action="insert.do" method="post">
-			<input name="cityID" value="ID">
-			<input name="city" value="city">
-				<select name="father">
-					<c:forEach items="${prolist}"  var="s" >
-						<option value="${s.provinceID }" >${s.province}</option>
-					</c:forEach>
-				</select>
-			<input type="submit" value="提交">
-	</form>
-	</c:if>
-		
-	
-	<c:if test="${city!=null}">
-	<form action="update.do" method="post">
-			<input name="id"  type="hidden" value="${city.id }">
-			<input name="cityID" value="${city.cityID}">
-			<input name="city" value="${city.city}">
-				<select name="father">
-					<c:forEach items="${prolist}"  var="s" >
-						<c:if test="${(city.father).equals(s.provinceID)}">
-							<option value="${s.provinceID }" selected="selected">${s.province}</option>
-						</c:if>
-						<c:if test="${!(city.father).equals(s.provinceID)}">
-							<option value="${s.provinceID }" >${s.province}</option>
-						</c:if>
-					</c:forEach>
-				</select>
-			<input type="submit" value="提交">
-	</form>
-	</c:if>
-	
-	
+<c:if test="${param.id==null}">
+<form class="layui-form" lay-filter="myform" action="Address/insert.do">
+</c:if>
+<c:if test="${param.id!=null}">
+<form class="layui-form" lay-filter="myform" action="Address/update.do">
+<input type="hidden" name="id" >
+</c:if>
+  <div class="layui-form-item">
+    <label class="layui-form-label">cityID</label>
+    <div class="layui-input-block">
+      <input type="text" name="cityID"  autocomplete="off" placeholder="请输入cityID" class="layui-input">
+    </div>
+  </div>
+   <div class="layui-form-item">
+    <label class="layui-form-label">city</label>
+    <div class="layui-input-block">
+    <input type="text" name="city"  autocomplete="off" placeholder="请输入city" class="layui-input">
+    </div>
+  </div>
+   <div class="layui-form-item">
+    <label class="layui-form-label">所属省</label>
+    <div class="layui-input-block">
+      <select name="father" >
+      </select>
+    </div>
+  </div>
+  
+   <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit="" lay-filter="demo1">保存</button>
+    </div>
+  </div>
+</form>
+
+<script type="text/javascript">
+
+var id="${param.id}";
+
+layui.use(['form',], function(){
+	  var form = layui.form;
+	  form.on('submit(demo1)', function(data){
+		 $.post($("form").attr("action"), data.field, function(json) {
+			  closeFrame();
+			  parent.fresh('demo');
+			}, "json");
+		    return false;
+		  });
+});
+
+function init(){
+	$.post("Address/edit.do",{id:id}, function(json) {
+		render('myform', json);
+		getlist("Address/getPros.do","[name=father]",json.provinceID);
+	},"json");
+}
+if(id.length>0){
+	init();
+}else{
+	getlist("Address/getPros.do","[name=father]"," ");
+}
+
+</script>
 </body>
 </html>

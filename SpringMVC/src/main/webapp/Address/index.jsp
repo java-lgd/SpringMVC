@@ -6,48 +6,119 @@
 <head>
 <meta charset="UTF-8">
 <title>城市</title>
-	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-	function del(id) {
-		if(confirm("是否删除？")){
-			open("delete.do?id="+id,"_self");
-		}
-	}
-</script>
+<base href="../">
+<link href="layui/css/layui.css" rel="stylesheet">
+<script type="text/javascript" src="layui/layui.all.js"></script>
+<script src="js/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="js/my.js"></script>
+<style type="text/css">
+.input {
+	font-size: 16px; width : 200px;
+	height: 30px;
+	margin-top: -10px;
+	margin-right: 10px;
+	width: 200px;
+}
+
+.layui-form-select{width:200px;
+}
+</style>
 </head>
 <body>
-	<form action="index.do" method="post">
-		<input name="txt" value="${cur}">
-		<button type="submit">查找</button>
-	</form>
+	<table id="demo" lay-filter="test"></table>
+<script type="text/html" id="barDemo">
+<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script type="text/html" id="toolbarDemo">
+  <div class="layui-btn-container">
+    <div class="layui-input-inline">
+      <input type="text" name="txt" lay-verify="title"  autocomplete="off" placeholder="请输入名称" class="layui-input input">
+    </div>
+    <button class="layui-btn layui-btn-sm" lay-event="search">查询</button>
+    <button class="layui-btn layui-btn-sm" lay-event="add">新增</button>
+  </div>
+</script>
+
+	<script>
 	
-	<a href="add.do">新增</a>
-	
-	<table>
-		<tr style="text-align: center;">
-			<td style="text-align: center;">城市编号</td>
-			<td style="text-align: center;">城市名称</td>
-			<td style="text-align: center;">所属省</td>
-			<td style="text-align: center;">操作</td>
-		</tr>
-	<c:forEach items="${citylist}" var="c">
-	<tr>
-				<td style="text-align: center;">${c.cityID}</td>
-				<td style="text-align: center;">${c.city}</td>
-				<td style="text-align: center;">${c.province}</td>
-				<td>
-					<button >
-							<a href="javascript:del(${c.id })">删除</a>
-					</button>
-					<button >
-							<a href="edit.do?id=${c.id }">修改</a>
-					</button>
-				</td>
-	</tr>
-	</c:forEach>
-	</table>
-	
+		layui.use('table', function() {
+			var table = layui.table;
+
+			//第一个实例
+			table.render({
+				elem : '#demo',
+				height : 462,
+				url : 'Address/index.do', //数据接口
+				toolbar : '#toolbarDemo',
+				page : 1 ,//开启分页	
+				cols : [ [ //表头
+				{
+					field : 'id',
+					title : 'ID',
+					width : 80,
+					sort : true,
+					fixed : 'right'
+				}, {
+					field : 'cityID',
+					title : '城市编号',
+					width : 200
+				}, {
+					field : 'city',
+					title : '城市名',
+					width : 200
+				}, {
+					field : 'province',
+					title : '所属省',
+					width : 180
+				}, {
+					fixed : 'right',
+					title : '操作',
+					toolbar : '#barDemo',
+					width : 150,
+					align : 'center' 
+				}
+
+				] ],
+				parseData : function(res) {
+					return {
+						"code" : res.code,
+						"msg" : res.msg,
+						"count" : res.count,
+						data : res.list
+					}
+				}
+			});
+			
+			
+
+			//obj 行      obj.data 行数据    data.id 列
+			//test  是table的lay-filter="test" 属性
+			table.on('tool(test)', function(obj) {
+				var data = obj.data;
+				if (obj.event === 'del') { ///lay-event 属性
+					myconfirm("刪除？",function(){
+						$.post("Address/delete.do", {id : data.id}, 
+								function(json) {
+							reload('demo');
+							layer.close(layer.index);
+								}, "json");
+					});
+				}else{
+					openFrame('Address/edit.jsp?id='+data.id);
+				}
+			});
+
+			table.on('toolbar(test)', function(obj) {
+				if (obj.event === 'search') {
+					var txt = $(event.target).prev().find("input").val();
+					reload('demo',{txt : txt});
+				} else {
+					openFrame("Address/edit.jsp");
+				}
+			});
+
+		});
+	</script>
 </body>
 </html>

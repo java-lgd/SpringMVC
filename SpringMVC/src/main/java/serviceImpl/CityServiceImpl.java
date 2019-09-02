@@ -15,8 +15,12 @@ public class CityServiceImpl implements CityService{
 	@Autowired
 	CityDao dao;
 
-	public List<City> select(String txt) {
-		return dao.select(txt);
+	public int selectCount(String txt) {
+		return dao.selectCount(txt);
+	}
+
+	public List<City> select(String txt,String limit) {
+		return dao.select(txt,limit);
 	}
 
 	public void insert(City c) {
@@ -34,5 +38,5 @@ public class CityServiceImpl implements CityService{
 	public City selectById(int id){
 		return  dao.selectById(id);
 	}
-
+	
 }
