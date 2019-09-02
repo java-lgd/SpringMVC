@@ -19,11 +19,11 @@
 </style>
 
 <c:if test="${param.id==null}">
-<form class="layui-form" lay-filter="myform" method="POST" action="<%=request.getServletContext().getContextPath()%>/Address">
+<form class="layui-form" lay-filter="myform" method="POST" action="Address">
 <input type="hidden" name="_method" value="POST">
 </c:if>
 <c:if test="${param.id!=null}">
-<form class="layui-form" lay-filter="myform" method="POST" action="<%=request.getServletContext().getContextPath()%>/Address">
+<form class="layui-form" lay-filter="myform" method="POST" action="Address">
 <input type="hidden" name="_method" value="PUT">
 <input type="hidden" name="id" >
 </c:if>
