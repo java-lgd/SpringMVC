@@ -50,6 +50,8 @@
 				elem : '#demo',
 				height : 462,
 				url : 'Address', //数据接口
+				method:"post",
+				where:{_method:"GET"},
 				toolbar : '#toolbarDemo',
 				page : 1 ,//开启分页	
 				cols : [ [ //表头
