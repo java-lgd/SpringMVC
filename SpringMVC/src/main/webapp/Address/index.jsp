@@ -53,7 +53,7 @@
 				method:"post",
 				where:{_method:"GET"},
 				toolbar : '#toolbarDemo',
-				page : 1 ,//开启分页	
+				page : true ,//开启分页	
 				cols : [ [ //表头
 				{
 					field : 'id',
