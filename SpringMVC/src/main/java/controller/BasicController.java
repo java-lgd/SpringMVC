@@ -9,8 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import serviceImpl.BasicServiceImpl;
+import utils.ReturnInfo;
 
 
 @Controller
@@ -37,38 +39,27 @@ public class BasicController<T>  {
 		return (Class<T>) pt.getActualTypeArguments()[0];
 	}
 		
-	@RequestMapping("index")
-	public String index(ModelMap m,HttpServletRequest req) {
-		m.put("list", basicservice.select(""));
-		return getTname()+"/index";
-	}
 	
 	@RequestMapping("delete")
-	public String delete(Integer id,ModelMap m,HttpServletRequest req) {
+	public @ResponseBody String delete(Integer id,HttpServletRequest req) {
 		basicservice.delete(id);
-		 return index( m,req);
-	}
-	
-	@RequestMapping("add")
-	public String add(ModelMap m,HttpServletRequest req) {
-		return getTname()+"/edit";
+		return "{\"status\":1}";
 	}
 	
 	@RequestMapping("edit")
-	public String edit(Integer id,ModelMap m,HttpServletRequest req) {
-		m.put("info", basicservice.selectById(id));
-		return add( m,req);
+	public @ResponseBody T edit(Integer id,HttpServletRequest req) {
+		return basicservice.selectById(id);
 	}
 	
 	@RequestMapping("insert")
-	public String insert(T t,ModelMap m,HttpServletRequest req) {
+	public @ResponseBody String insert(T t,HttpServletRequest req) {
 		basicservice.insert(t);
-		return index( m,req);
+		return "{\"status\":1}";
 	}
 	
 	@RequestMapping("update")
-	public String update(T t,ModelMap m,HttpServletRequest req) {
+	public @ResponseBody String update(T t,HttpServletRequest req) {
 		basicservice.update(t);
-		return index( m,req);
+		return "{\"status\":1}";
 	}
 }

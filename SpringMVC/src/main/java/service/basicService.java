@@ -6,8 +6,10 @@ import model.City;
 
 
 public interface basicService<T> {
+	
+		public int selectCount(String txt);
 
-		public List<T> select(String txt);
+		public List<T> select(String txt,String limit);
 		
 		public Integer insert(T c );
 		

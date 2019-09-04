@@ -14,8 +14,11 @@ import model.City;
 @Repository
 public interface CityDao{
 	
-	@Select("select city.*,province from city inner join province on father=provinceID ${where} order by city.id")
-	public List<City> select(@Param("where") String txt);
+	@Select("select count(1) from city  ${txt}")
+	public int selectCount(@Param("txt") String txt);
+	
+	@Select("select city.*,province from city inner join province on father=provinceID ${where} ${limit} ")
+	public List<City> select(@Param("where") String txt,@Param("limit") String limit);
 	
 	@Insert("insert into city(cityID,city,father) value(#{cityID},#{city},#{father})")
 	public Integer insert(City c );

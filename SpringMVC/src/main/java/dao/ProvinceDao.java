@@ -11,8 +11,8 @@ import org.apache.ibatis.annotations.Update;
 import model.Province;
 
 public interface ProvinceDao{
-	@Select("select * from province ${where}")
-	public List<Province> select(@Param("where") String txt);
+	@Select("select * from province ${where} ${limit}")
+	public List<Province> select(@Param("where") String txt,@Param("limit") String limit);
 	
 	@Insert("insert into province(provinceID,province) value(#{provinceID},#{province})")
 	public Integer insert(Province c );

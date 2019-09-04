@@ -33,8 +33,8 @@ public class BasicServiceImpl<T> implements basicService<T> {
 		}
 	}
 
-	public List<T> select(String txt) {
-		Object o = execDao("select", txt);
+	public List<T> select(String txt,String limit) {
+		Object o = execDao("select", txt,limit);
 		if (o != null)
 			return (List<T>) o;
 		else
@@ -71,6 +71,10 @@ public class BasicServiceImpl<T> implements basicService<T> {
 			return (Integer) o;
 		else
 			return -2;
+	}
+
+	public int selectCount(String txt) {
+		return (Integer) execDao("selectCount", txt);
 	}
 
 }
