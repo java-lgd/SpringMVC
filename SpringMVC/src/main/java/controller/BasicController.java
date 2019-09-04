@@ -39,6 +39,17 @@ public class BasicController<T>  {
 		return (Class<T>) pt.getActualTypeArguments()[0];
 	}
 		
+	@RequestMapping("index")
+	public @ResponseBody ReturnInfo index(String txt,Integer page,Integer limit) {
+		ReturnInfo info = new ReturnInfo();
+		String where="";
+		if(txt!=null&&txt.length()>0)
+			where="where city like '%"+txt.trim()+"%'";
+		String lim = info.getLimit(page, limit);
+		info.setList(basicservice.select(where,lim));
+		info.setCount(basicservice.selectCount(where));
+		return info;
+	}
 	
 	@RequestMapping("delete")
 	public @ResponseBody String delete(Integer id,HttpServletRequest req) {

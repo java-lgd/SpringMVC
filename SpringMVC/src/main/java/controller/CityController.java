@@ -25,17 +25,6 @@ public class CityController extends BasicController<City>{
 	@Autowired
 	ProvinceService	pservice;
 	
-	@RequestMapping("index")
-	public @ResponseBody ReturnInfo index(String txt,Integer page,Integer limit) {
-		ReturnInfo info = new ReturnInfo();
-		String where="";
-		if(txt!=null&&txt.length()>0)
-				where="where city like '%"+txt.trim()+"%'";
-		String lim = info.getLimit(page, limit);
-		info.setList(service.select(where,lim));
-		info.setCount(service.selectCount(where));
-		return info;
-	}
 	
 	@RequestMapping("getPros")
 	public @ResponseBody  List<Province> getPros(){
