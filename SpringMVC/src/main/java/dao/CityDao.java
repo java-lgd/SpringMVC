@@ -12,18 +12,20 @@ import org.springframework.stereotype.Repository;
 import model.City;
 
 @Repository
-public interface CityDao {
+public interface CityDao{
 	
-	@Select("select city.*,province from city inner join province on father=provinceID ${where}")
+	@Select("select city.*,province from city inner join province on father=provinceID ${where} order by city.id")
 	public List<City> select(@Param("where") String txt);
 	
 	@Insert("insert into city(cityID,city,father) value(#{cityID},#{city},#{father})")
-	public void insert(City c );
+	public Integer insert(City c );
 	
 	@Delete("delete from city where id=#{id}")
-	public void delete(int id);
+	public Integer delete(@Param("id") Integer id);
 	
 	@Update("update city set cityID=#{cityID},city=#{city},father=#{father} where id=#{id}")
-	public void update(City c);
+	public Integer update(City c);
 
+	@Select("select *  from city where id=#{id}")
+	public City selectById(@Param("id") Integer id);
 }

@@ -10,16 +10,16 @@ import org.apache.ibatis.annotations.Update;
 
 import model.Province;
 
-public interface ProvinceDao {
+public interface ProvinceDao{
 	@Select("select * from province ${where}")
 	public List<Province> select(@Param("where") String txt);
 	
 	@Insert("insert into province(provinceID,province) value(#{provinceID},#{province})")
-	public void insert(Province c );
+	public Integer insert(Province c );
 	
 	@Delete("delete from province where id=#{id}")
-	public void delete(int id);
+	public Integer delete(int id);
 	
 	@Update("update city set provinceID=#{provinceID},province=#{province} where id=#{id}")
-	public void update(Province c);
+	public Integer update(Province c);
 }

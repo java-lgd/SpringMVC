@@ -23,13 +23,15 @@
 	
 	<table>
 		<tr>
+			<td>ID</td>
 			<td>城市编号</td>
 			<td>城市名称</td>
 			<td>所属省号</td>
 			<td>操作</td>
 		</tr>
-	<c:forEach items="${citylist}" var="c">
+	<c:forEach items="${list}" var="c">
 	<tr>
+				<td>${c.id}</td>
 				<td>${c.cityID}</td>
 				<td>${c.city}</td>
 				<td>${c.province}</td>
