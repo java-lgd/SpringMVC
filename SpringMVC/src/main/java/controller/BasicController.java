@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import serviceImpl.BasicServiceImpl;
 import utils.ReturnInfo;
 
-
-@Controller
 public class BasicController<T>  {
 	
 	serviceImpl.BasicServiceImpl<T> basicservice;
@@ -52,24 +50,24 @@ public class BasicController<T>  {
 	}
 	
 	@RequestMapping("delete")
-	public @ResponseBody String delete(Integer id,HttpServletRequest req) {
+	public @ResponseBody String delete(Integer id) {
 		basicservice.delete(id);
 		return "{\"status\":1}";
 	}
 	
 	@RequestMapping("edit")
-	public @ResponseBody T edit(Integer id,HttpServletRequest req) {
+	public @ResponseBody T edit(Integer id) {
 		return basicservice.selectById(id);
 	}
 	
 	@RequestMapping("insert")
-	public @ResponseBody String insert(T t,HttpServletRequest req) {
+	public @ResponseBody String insert(T t) {
 		basicservice.insert(t);
 		return "{\"status\":1}";
 	}
 	
 	@RequestMapping("update")
-	public @ResponseBody String update(T t,HttpServletRequest req) {
+	public @ResponseBody String update(T t) {
 		basicservice.update(t);
 		return "{\"status\":1}";
 	}

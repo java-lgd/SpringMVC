@@ -12,12 +12,11 @@ import org.springframework.stereotype.Service;
 import model.City;
 import service.basicService;
 
-@Service
 public class BasicServiceImpl<T> implements basicService<T> {
 
 	private Object execDao(String mname, Object... objs) {
 		try {
-			Field f =this.getClass().getDeclaredField("dao");
+			Field f =this.getClass().getDeclaredField("dao");     
 			f.setAccessible(true);
 			Object dao = f.get(this);
 			
